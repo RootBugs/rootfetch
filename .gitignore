@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+*.db
+logs/
+nssm.exe
+run_service.bat
+static/index.html
+static/swagger/
