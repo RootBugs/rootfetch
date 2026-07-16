@@ -9,8 +9,8 @@ httpx>=0.27.0
 beautifulsoup4>=4.12.3
 markdownify>=0.12.1
 curl-cffi>=0.15.0
-# lxml / trafilatura / readability-lxml skipped on Python 3.14 (no wheel).
-# Extractor falls back to BeautifulSoup + html.parser gracefully.
+# trafilatura and readability-lxml are intentionally omitted.
+# The extractor gracefully falls back through trafilatura -> readability -> BeautifulSoup + html.parser.
 
 # LLM / Research
 openai>=1.35.0
