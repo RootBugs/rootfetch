@@ -24,8 +24,6 @@ class Settings(BaseSettings):
     google_cse_id: Optional[str] = None
     openai_api_key: Optional[str] = None
     proxy_url: Optional[str] = None
-    stripe_api_key: Optional[str] = None
-    stripe_webhook_secret: Optional[str] = None
 
     keyless_rate_limit: str = "20/minute"
     keyed_rate_limit: str = "100/minute"
