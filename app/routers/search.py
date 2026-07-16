@@ -5,7 +5,7 @@ import logging
 import time
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth import verify_api_key, log_usage
@@ -24,6 +24,7 @@ router = APIRouter(prefix="/search", tags=["search"])
 @router.post("", response_model=SearchResponse)
 async def search(
     request: SearchRequest,
+    http_request: Request,
     api_key: Optional[APIKey] = Depends(verify_api_key),
     db: AsyncSession = Depends(get_db),
 ):
@@ -127,7 +128,7 @@ async def search(
     response_time = round(time.time() - start_time, 2)
 
     # Log usage
-    await log_usage("/search", api_key, db=db)
+    await log_usage("/search", api_key, db=db, ip_address=http_request.client.host if http_request.client else None)
 
     return SearchResponse(
         query=request.query,

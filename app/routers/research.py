@@ -6,7 +6,7 @@ import logging
 import time
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -23,6 +23,7 @@ router = APIRouter(prefix="/research", tags=["research"])
 @router.post("", response_model=ResearchResponse)
 async def create_research(
     request: ResearchRequest,
+    http_request: Request,
     api_key: Optional[APIKey] = Depends(verify_api_key),
     db: AsyncSession = Depends(get_db),
 ):
@@ -51,6 +52,7 @@ async def create_research(
 @router.get("/{request_id}", response_model=ResearchResponse)
 async def get_research(
     request_id: str,
+    http_request: Request,
     api_key: Optional[APIKey] = Depends(verify_api_key),
     db: AsyncSession = Depends(get_db),
 ):

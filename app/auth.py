@@ -79,10 +79,10 @@ async def log_usage(
     api_key: Optional[APIKey],
     credits: int = 1,
     success: bool = True,
+    ip_address: Optional[str] = None,
     db: AsyncSession = Depends(get_db),
 ) -> None:
     """Log API usage and deduct credits."""
-    ip_address = None  # Would come from request in production
 
     usage = UsageLog(
         api_key_id=api_key.id if api_key else None,
